@@ -1,9 +1,10 @@
 import { Router } from "express";
+import AutorController from "../controllers/AutorController";
 
 const route = Router();
 
-route.get("/", (req, res) => {
-  res.json("OK");
-});
+const autorControlador = new AutorController();
+
+route.get("/autores", autorControlador.listar);
 
 export default route;
