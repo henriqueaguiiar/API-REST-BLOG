@@ -6,5 +6,6 @@ const route = Router();
 const autorControlador = new AutorController();
 
 route.get("/autores", autorControlador.listar);
+route.get("/autores/:id", autorControlador.detalhar);
 
 export default route;
