@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+
 type Tautor = {
   nome: string;
   idade: number;

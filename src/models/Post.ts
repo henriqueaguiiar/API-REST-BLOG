@@ -9,10 +9,10 @@ type Tpost = {
 
 export default class Post {
   readonly id: string;
-  titulo: string;
-  descricao: string;
-  autor: Autor;
-  data_criacao: Date;
+  public titulo: string;
+  public descricao: string;
+  public autor: Autor;
+  public data_criacao: Date;
 
   constructor(post: Tpost) {
     this.id = this.gerarId();
