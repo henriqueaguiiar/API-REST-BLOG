@@ -66,4 +66,18 @@ export default class PostController {
     }
     return res.status(404).json({ message: "Post não encontrado" });
   };
+
+  deletar = (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const postIndex = posts.findIndex((post) => {
+      return post.id === id;
+    });
+
+    if (postIndex === -1) {
+      return res.status(404).json({ message: "Post não encontrado" });
+    }
+    posts.splice(postIndex, 1);
+    return res.status(204).json();
+  };
 }
