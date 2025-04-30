@@ -44,4 +44,26 @@ export default class PostController {
     posts.push(post);
     return res.status(201).json(post);
   };
+
+  editar = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { titulo, descricao } = req.body;
+
+    if (!titulo || !descricao) {
+      return res
+        .status(400)
+        .json({ message: "Titulo, descricao e autor_id são obrigatórios" });
+    }
+
+    const post = posts.find((post) => {
+      return post.id === id;
+    });
+
+    if (post) {
+      post.descricao = descricao;
+      post.titulo = titulo;
+      return res.status(204).json();
+    }
+    return res.status(404).json({ message: "Post não encontrado" });
+  };
 }
