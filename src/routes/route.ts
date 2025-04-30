@@ -11,4 +11,6 @@ route.post("/autores/", autorControlador.cadastrar);
 route.put("/autores/:id", autorControlador.editar);
 route.delete("/autores/:id", autorControlador.deletar);
 
+route.get("/posts", autorControlador.listar);
+
 export default route;
