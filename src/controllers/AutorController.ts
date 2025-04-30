@@ -3,7 +3,7 @@ import { autores } from "../database/data";
 import Autor from "../models/Autor";
 
 export default class AutorController {
-  listar = (req: Request, res: Response) =>{
+  listar = (req: Request, res: Response) => {
     return res.status(200).json(autores);
   };
 
@@ -20,27 +20,26 @@ export default class AutorController {
     return res.status(404).json({ message: "Autor não encontrado" });
   };
 
-  cadastrar = (req: Request, res: Response) =>{
-    const { nome, idade} = req.body
+  cadastrar = (req: Request, res: Response) => {
+    const { nome, idade } = req.body;
 
-
-    if(!nome || !idade){
+    if (!nome || !idade) {
       return res.status(400).json({ message: "Nome e idade são obrigatórios" });
     }
-    const autor = new Autor({ 
-      nome: nome, 
-      idade: idade 
+    const autor = new Autor({
+      nome: nome,
+      idade: idade,
     });
 
     autores.push(autor);
     return res.status(201).json(autor);
-  }
+  };
 
   editar = (req: Request, res: Response) => {
     const { id } = req.params;
     const { nome, idade } = req.body;
 
-    if(!nome || !idade){
+    if (!nome || !idade) {
       return res.status(400).json({ message: "Nome e idade são obrigatórios" });
     }
 
@@ -56,4 +55,17 @@ export default class AutorController {
     return res.status(404).json({ message: "Autor não encontrado" });
   };
 
+  deletar = (req: Request, res: Response) => {
+    const { id } = req.params;
+
+    const autorIndex = autores.findIndex((autor) => {
+      return autor.id === id;
+    });
+
+    if (autorIndex === -1) {
+      return res.status(404).json({ mensagem: "Autor não encontrado" });
+    }
+    autores.splice(autorIndex, 1);
+    return res.status(204).json();
+  };
 }
